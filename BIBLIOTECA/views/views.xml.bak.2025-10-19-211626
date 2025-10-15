@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ======================== AUTORES ======================== -->
+  <record id="view_biblioteca_autor_list" model="ir.ui.view">
+    <field name="name">biblioteca.autor.list</field>
+    <field name="model">biblioteca.autor</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Nombres"/>
+        <field name="apellidos" string="Apellidos"/>
+        <field name="libro_ids" widget="many2many_tags">
+      </list>
+    </field>
+  </record>
+
+  <record id="view_biblioteca_autor_form" model="ir.ui.view">
+    <field name="name">biblioteca.autor.form</field>
+    <field name="model">biblioteca.autor</field>
+    <field name="arch" type="xml">
+      <form string="Autor">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="apellidos"/>
+          </group>
+          <group>
+            <!-- SIN context (evita error de active_id) -->
+            <field name="libro_ids" widget="many2many_tags">
+            <field name="libro_ids" widget="many2many_tags">
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_biblioteca_autor" model="ir.actions.act_window">
+    <field name="name">Autores</field>
+    <field name="res_model">biblioteca.autor</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- ======================== LIBROS ======================== -->
+  <!-- LISTA extendida -->
+  <record id="view_biblioteca_libro_list" model="ir.ui.view">
+    <field name="name">biblioteca.libro.list</field>
+    <field name="model">biblioteca.libro</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Título"/>
+        <field name="autor_id" string="Autor"/>
+        <field name="categoria"/>
+        <field name="genero_id" string="Género (catálogo)"/>
+        <field name="anio_pub" string="Año de publicación"/>
+        <field name="editorial_id" string="Editorial"/>
+        <field name="numero" string="Número"/>
+        <field name="estado"/>
+        <field name="costo" string="Costo"/>
+        <field name="ubicacion_id" string="Ubicación"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_biblioteca_libro_form" model="ir.ui.view">
+    <field name="name">biblioteca.libro.form</field>
+    <field name="model">biblioteca.libro</field>
+    <field name="arch" type="xml">
+      <form string="Libro">
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="autor_id"/>
+              <field name="autores" widget="many2many_tags"/>
+              <field name="categoria"/>
+              <field name="genero_id"/>
+            </group>
+            <group>
+              <field name="anio_pub"/>
+              <field name="editorial_id"/>
+              <field name="numero"/>
+              <field name="estado"/>
+              <field name="costo"/>
+              <field name="ubicacion_id"/>
+            </group>
+          </group>
+          <group>
+            <field name="descripcion"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_biblioteca_libro" model="ir.actions.act_window">
+    <field name="name">Libros</field>
+    <field name="res_model">biblioteca.libro</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- ======================== EDITORIALES ======================== -->
+  <record id="view_biblioteca_editorial_list" model="ir.ui.view">
+    <field name="name">biblioteca.editorial.list</field>
+    <field name="model">biblioteca.editorial</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Nombre"/>
+        <field name="active" string="Activo"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_biblioteca_editorial_form" model="ir.ui.view">
+    <field name="name">biblioteca.editorial.form</field>
+    <field name="model">biblioteca.editorial</field>
+    <field name="arch" type="xml">
+      <form string="Editorial">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_biblioteca_editorial" model="ir.actions.act_window">
+    <field name="name">Editoriales</field>
+    <field name="res_model">biblioteca.editorial</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- ======================== GÉNEROS ======================== -->
+  <record id="view_biblioteca_genero_list" model="ir.ui.view">
+    <field name="name">biblioteca.genero.list</field>
+    <field name="model">biblioteca.genero</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Nombre"/>
+        <field name="active" string="Activo"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_biblioteca_genero_form" model="ir.ui.view">
+    <field name="name">biblioteca.genero.form</field>
+    <field name="model">biblioteca.genero</field>
+    <field name="arch" type="xml">
+      <form string="Género">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_biblioteca_genero" model="ir.actions.act_window">
+    <field name="name">Géneros</field>
+    <field name="res_model">biblioteca.genero</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- ======================== UBICACIONES ======================== -->
+  <record id="view_biblioteca_ubicacion_list" model="ir.ui.view">
+    <field name="name">biblioteca.ubicacion.list</field>
+    <field name="model">biblioteca.ubicacion</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Nombre"/>
+        <field name="active" string="Activo"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_biblioteca_ubicacion_form" model="ir.ui.view">
+    <field name="name">biblioteca.ubicacion.form</field>
+    <field name="model">biblioteca.ubicacion</field>
+    <field name="arch" type="xml">
+      <form string="Ubicación">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_biblioteca_ubicacion" model="ir.actions.act_window">
+    <field name="name">Ubicaciones</field>
+    <field name="res_model">biblioteca.ubicacion</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- ======================== MENÚS ======================== -->
+  <menuitem id="menu_biblioteca_root" name="Biblioteca" sequence="10"/>
+
+  <menuitem id="menu_biblioteca_autores" name="Autores"
+            parent="menu_biblioteca_root" action="action_biblioteca_autor" sequence="10"/>
+
+  <menuitem id="menu_biblioteca_libros" name="Libros"
+            parent="menu_biblioteca_root" action="action_biblioteca_libro" sequence="20"/>
+
+  <menuitem id="menu_biblioteca_editoriales" name="Editoriales"
+            parent="menu_biblioteca_root" action="action_biblioteca_editorial" sequence="30"/>
+
+  <menuitem id="menu_biblioteca_generos" name="Géneros"
+            parent="menu_biblioteca_root" action="action_biblioteca_genero" sequence="40"/>
+
+  <menuitem id="menu_biblioteca_ubicaciones" name="Ubicaciones"
+            parent="menu_biblioteca_root" action="action_biblioteca_ubicacion" sequence="50"/>
+
+</odoo>
+

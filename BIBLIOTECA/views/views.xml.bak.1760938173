@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- App / Menú raíz -->
+    <menuitem id="menu_biblioteca_root" name="Biblioteca" sequence="10"/>
+
+    <!-- Libros -->
+    <menuitem id="menu_biblioteca_libros" name="Libros"
+              parent="menu_biblioteca_root" action="action_biblioteca_libro" sequence="10"/>
+
+    <!-- Autores -->
+    <record id="action_biblioteca_autor" model="ir.actions.act_window">
+        <field name="name">Autores</field>
+        <field name="res_model">biblioteca.autor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_biblioteca_autores" name="Autores"
+              parent="menu_biblioteca_root" action="action_biblioteca_autor" sequence="20"/>
+
+    <!-- Préstamos -->
+    <record id="action_biblioteca_prestamo" model="ir.actions.act_window">
+        <field name="name">Préstamos</field>
+        <field name="res_model">biblioteca.prestamo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_biblioteca_prestamos" name="Préstamos"
+              parent="menu_biblioteca_root" action="action_biblioteca_prestamo" sequence="30"/>
+
+    <!-- Multas -->
+    <record id="action_biblioteca_multa" model="ir.actions.act_window">
+        <field name="name">Multas</field>
+        <field name="res_model">biblioteca.multa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_biblioteca_multas" name="Multas"
+              parent="menu_biblioteca_root" action="action_biblioteca_multa" sequence="40"/>
+</odoo>

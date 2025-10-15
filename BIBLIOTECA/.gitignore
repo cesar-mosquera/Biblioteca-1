@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+*.swp
+*.log
+.env
+.venv/
+venv/
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
+# Odoo
+**/static/lib/**
+/*.zip
+*.pot
+*.mo
+# No subas bases de datos ni filestore aquí

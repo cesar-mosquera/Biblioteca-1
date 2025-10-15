@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ROOT del módulo (si no existe en otro XML) -->
+    <menuitem id="menu_biblioteca_root" name="Biblioteca" sequence="10"/>
+
+    <!-- Menú de Préstamos y Multas colgado del root -->
+    <menuitem id="menu_biblioteca_prestamos_root"
+              name="Préstamos y Multas"
+              parent="menu_biblioteca_root"
+              sequence="30"/>
+
+    <!-- Acción y menú para Multas -->
+    <record id="action_biblioteca_multa" model="ir.actions.act_window">
+        <field name="name">Multas</field>
+        <field name="res_model">biblioteca.multa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_biblioteca_multa"
+              name="Multas"
+              parent="menu_biblioteca_prestamos_root"
+              action="action_biblioteca_multa"
+              sequence="10"/>
+
+    <!-- Préstamos -->
+    <record id="view_biblioteca_prestamo_tree" model="ir.ui.view">
+        <field name="name">biblioteca.prestamo.tree</field>
+        <field name="model">biblioteca.prestamo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="libro_id"/>
+                <field name="socio_id"/>
+                <field name="fecha_prestamo"/>
+                <field name="fecha_vencimiento"/>
+                <field name="fecha_devolucion"/>
+                <field name="estado"/>
+                <field name="dias_atraso"/>
+                <field name="monto_multa"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record id="view_biblioteca_prestamo_form" model="ir.ui.view">
+        <field name="name">biblioteca.prestamo.form</field>
+        <field name="model">biblioteca.prestamo</field>
+        <field name="arch" type="xml">
+            <form string="Préstamo">
+                <header>
+                    <button name="action_confirmar" type="object" string="Confirmar" states="borrador" class="btn-primary"/>
+                    <button name="action_devolver" type="object" string="Registrar Devolución" states="prestado,atrasado" class="btn-secondary"/>
+                    <button name="action_cancelar" type="object" string="Cancelar" states="borrador,prestado,atrasado" class="btn-danger"/>
+                    <field name="estado" widget="statusbar" statusbar_visible="borrador,prestado,atrasado,devuelto,cancelado"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="libro_id"/>
+                            <field name="socio_id"/>
+                        </group>
+                        <group>
+                            <field name="fecha_prestamo"/>
+                            <field name="fecha_vencimiento" required="1"/>
+                            <field name="fecha_devolucion" attrs="{'invisible':[('estado','in',['borrador','prestado','atrasado'])]}"/>
+                        </group>
+                    </group>
+                    <group string="Atraso y Multa">
+                        <field name="dias_gracia"/>
+                        <field name="dias_atraso" readonly="1"/>
+                        <field name="multa_diaria"/>
+                        <field name="monto_multa" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Multas">
+                            <field name="multa_id">
+                                <tree editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="dias_atraso" readonly="1"/>
+                                    <field name="multa_diaria" readonly="1"/>
+                                    <field name="monto_total" readonly="1"/>
+                                    <field name="pagado"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biblioteca_prestamo" model="ir.actions.act_window">
+        <field name="name">Préstamos</field>
+        <field name="res_model">biblioteca.prestamo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_biblioteca_prestamos" name="Préstamos" parent="menu_biblioteca_prestamos_root"
+              action="action_biblioteca_prestamo" sequence="10"/>
+
+    <!-- Multas -->
+    <record id="view_biblioteca_multa_tree" model="ir.ui.view">
+        <field name="name">biblioteca.multa.tree</field>
+        <field name="model">biblioteca.multa</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="prestamo_id"/>
+                <field name="socio_id"/>
+                <field name="dias_atraso"/>
+                <field name="multa_diaria"/>
+                <field name="monto_total"/>
+                <field name="pagado"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_biblioteca_multa_form" model="ir.ui.view">
+        <field name="name">biblioteca.multa.form</field>
+        <field name="model">biblioteca.multa</field>
+        <field name="arch" type="xml">
+            <form string="Multa">
+                <header>
+                    <button name="action_marcar_pagado" type="object" string="Marcar Pagado" attrs="{'invisible':[('pagado','=',True)]}" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="prestamo_id"/>
+                            <field name="socio_id"/>
+                        </group>
+                        <group>
+                            <field name="dias_atraso" readonly="1"/>
+                            <field name="multa_diaria" readonly="1"/>
+                            <field name="monto_total" readonly="1"/>
+                            <field name="pagado"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biblioteca_multa" model="ir.actions.act_window">
+        <field name="name">Multas</field>
+        <field name="res_model">biblioteca.multa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_biblioteca_multas" name="Multas"
+              parent="menu_biblioteca_prestamos_root" action="action_biblioteca_multa" sequence="20"/>
+
+    <!-- Ajustes en Configuración -->
+    <record id="res_config_settings_view_form_biblioteca" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.biblioteca</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.view_res_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Biblioteca" string="Biblioteca">
+                    <h2>Parámetros de Biblioteca</h2>
+                    <group>
+                        <field name="biblioteca_multa_diaria"/>
+                        <field name="biblioteca_dias_gracia"/>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

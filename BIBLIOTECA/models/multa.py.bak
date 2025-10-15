@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+from odoo import api, fields, models, _
+
+class BibliotecaMulta(models.Model):
+    _name = 'biblioteca.multa'
+    _description = 'Multa por atraso'
+    _order = 'id desc'
+
+    name = fields.Char(string='Descripción', default='Multa')
+    prestamo_id = fields.Many2one('biblioteca.prestamo', string='Préstamo',
+                                  required=True, ondelete='cascade')
+    dias_atraso = fields.Integer(string='Días de atraso', required=True, default=1)
+    monto = fields.Monetary(string='Monto', required=True, default=0.0)
+    currency_id = fields.Many2one(related='prestamo_id.currency_id', store=True, readonly=True)
+    pagado = fields.Boolean(string='Pagado', default=False)
+
+    def action_marcar_pagado(self):
+        for rec in self:
+            rec.pagado = True

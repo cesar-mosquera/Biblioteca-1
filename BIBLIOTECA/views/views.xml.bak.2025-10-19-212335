@@ -1,0 +1,29 @@
+<odoo>
+  <!-- Lista (tree) de Autores -->
+  <record id="view_biblioteca_autor_list" model="ir.ui.view">
+    <field name="name">biblioteca.autor.list</field>
+    <field name="model">biblioteca.autor</field>
+    <field name="arch" type="xml">
+      <tree string="Autores">
+        <field name="name"/>
+        <field name="apellidos"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Formulario de Autores -->
+  <record id="view_biblioteca_autor_form" model="ir.ui.view">
+    <field name="name">biblioteca.autor.form</field>
+    <field name="model">biblioteca.autor</field>
+    <field name="arch" type="xml">
+      <form string="Autor">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="apellidos"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

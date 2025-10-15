@@ -1,0 +1,35 @@
+<odoo>
+  <!-- Menú raíz -->
+  <menuitem id="menu_biblioteca_root" name="Biblioteca" sequence="10"/>
+
+  <!-- Acciones -->
+  <record id="action_biblioteca_libro" model="ir.actions.act_window">
+    <field name="name">Libros</field>
+    <field name="res_model">biblioteca.libro</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="action_biblioteca_autor" model="ir.actions.act_window">
+    <field name="name">Autores</field>
+    <field name="res_model">biblioteca.autor</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="action_biblioteca_prestamo" model="ir.actions.act_window">
+    <field name="name">Préstamos</field>
+    <field name="res_model">biblioteca.prestamo</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="action_biblioteca_multa" model="ir.actions.act_window">
+    <field name="name">Multas</field>
+    <field name="res_model">biblioteca.multa</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Menús hijos -->
+  <menuitem id="menu_biblioteca_libros"     name="Libros"     parent="menu_biblioteca_root" action="action_biblioteca_libro"     sequence="10"/>
+  <menuitem id="menu_biblioteca_autores"    name="Autores"    parent="menu_biblioteca_root" action="action_biblioteca_autor"    sequence="20"/>
+  <menuitem id="menu_biblioteca_prestamos"  name="Préstamos"  parent="menu_biblioteca_root" action="action_biblioteca_prestamo" sequence="30"/>
+  <menuitem id="menu_biblioteca_multas"     name="Multas"     parent="menu_biblioteca_root" action="action_biblioteca_multa"    sequence="40"/>
+</odoo>

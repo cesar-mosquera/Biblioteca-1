@@ -1,0 +1,35 @@
+<odoo>
+  <!-- Lista -->
+  <record id="view_biblioteca_usuario_tree" model="ir.ui.view">
+    <field name="name">biblioteca.usuario.tree</field>
+    <field name="model">biblioteca.usuario</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" string="Nombres y Apellidos"/>
+        <field name="cedula" string="Cédula"/>
+        <field name="email" string="Email"/>
+        <field name="telefono" string="Teléfono"/>
+        <field name="active" string="Activo"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Formulario -->
+  <record id="view_biblioteca_usuario_form" model="ir.ui.view">
+    <field name="name">biblioteca.usuario.form</field>
+    <field name="model">biblioteca.usuario</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name" string="Nombres y Apellidos"/>
+            <field name="cedula" string="Cédula"/>
+            <field name="email" string="Email"/>
+            <field name="telefono" string="Teléfono"/>
+            <field name="active" string="Activo"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>
